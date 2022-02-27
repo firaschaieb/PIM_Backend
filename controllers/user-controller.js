@@ -26,7 +26,10 @@ exports.getUserByToken = async (req, res) => {
   res.send({ token, user: await User.findOne({ email: token.email }) });
 };
 
-
+exports.showCreateUser =async (req, res) => {
+  res.render("userView/addoredit");
+  }, 
+  
 exports.register = async (req, res) => {
 
   console.log("1111")
