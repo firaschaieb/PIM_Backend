@@ -9,7 +9,9 @@ const fs = require("fs");
 
 exports.getAll = async (req, res) => {
  // console.log("1111")
-  res.status(200).send({ users: await User.find(), message: "success" });
+
+  const users = await User.find();
+  res.render("userView/userList", { users });
 };
 
 exports.getUserByToken = async (req, res) => {
@@ -26,6 +28,7 @@ exports.getUserByToken = async (req, res) => {
 
 
 exports.register = async (req, res) => {
+
   console.log("1111")
   const {
     firstName,
@@ -42,6 +45,7 @@ exports.register = async (req, res) => {
   if (await User.findOne({ email })) {
     res.status(403).send({ message: "User existe deja !" });
   } else {
+  
     const nouveauUser = new User();
 
     nouveauUser.firstName = firstName;
@@ -56,7 +60,7 @@ exports.register = async (req, res) => {
     //nouveauUser.role = role;
 
     nouveauUser.save();
-
+    
     const token = jwt.sign({ email: email }, config.token_secret, {
       expiresIn: "36000000",
     });
