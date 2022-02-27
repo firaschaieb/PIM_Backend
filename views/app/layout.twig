@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Users</title>
+    <title>{% block title %}{% endblock %}</title>
 
     <!-- Fontfaces CSS-->
     <link href="../../css/font-face.css" rel="stylesheet" media="all">
@@ -60,7 +60,7 @@
 
                         <li>
                             <a href="userList.html">
-                                <i class="fa-user-circle-o "></i>Users</a>
+                                <i class="fa-user-circle-o "></i>Track</a>
 </li>
 
                     </ul>
@@ -80,9 +80,17 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
 
-                        <li class="active">
-                            <a href="userList.html">
-                                <i class="fas fa-user"></i>Users</a>
+                        <li >
+                            <a href="api/musicproject//">
+                                <i class="fas fa-file-audio"></i>MusicProject</a>
+                        </li>
+                        <li  class="active" >
+                            <a href="all">
+                                <i class="fas fa-user"></i>users</a>
+                        </li>
+                        <li  >
+                            <a href="../trackView/trackList.html">
+                                <i class="fas fa-headphones"></i>Track</a>
                         </li>
  
                             </ul>
@@ -223,23 +231,23 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="../../images/icon/avatar-01.jpg" alt="John Doe" />
+                                            <img src="../../images/icon/malek.jpg" alt="Med Malek" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="#">Med Malek</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="../../images/icon/avatar-01.jpg" alt="John Doe" />
+                                                        <img src="../../images/icon/malek.jpg" alt="Med Malek" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a href="#">Med Malek</a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email">medmalek@example.com</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -271,59 +279,9 @@
             <!-- END HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
+                {% block body %}
 
-                        <div class="row m-t-30">
-                            <div class="col-md-12">
-                                <!-- DATA TABLE-->
-                                <a href="addoredit.html"><button type="button" class="btn btn-primary">new</button></a>
-                                <div class="table-responsive m-b-40">
-                                    <table class="table table-borderless table-data3">
-                                        <thead>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Username</th>
-                                                <th>Email</th>
-                                                <th>Password</th>
-                                                <th>Joining Date</th>
-                                                <th>Profile Picture</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>id</td>
-                                                <td class="process">Username</td>
-                                                <td >email</td>
-                                                <td>pwd</td>
-                                                <td>date</td>
-                                                <td>pic</td>
-                                                <td>
-                                                    <button>modifier</button>
-                                                    <button>suppr</button>
-                                                </td>
-
-                                            </tr>
-                                           
-                                        </tbody>
-                                    </table>
-                    
-                                </div>
-                                <!-- END DATA TABLE-->
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>Copyright © 2022 OrchestraTech. All rights reserved. Template by <a href="#">OrchestraTech</a>.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                {% endblock %}
         </div>
 </div>
 </body>

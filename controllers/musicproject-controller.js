@@ -4,7 +4,8 @@ const MusicProject = require("../models/MusicProject");
 
 exports.getAll = async (req, res) => {
    
-    res.send({ musicproject: await MusicProject.find() });
+    const musicproject = await MusicProject.find();
+    res.render("musicprojectView/musicprojectList", { musicproject });
   };
 
 
