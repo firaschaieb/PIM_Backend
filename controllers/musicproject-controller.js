@@ -9,7 +9,9 @@ exports.getAll = async (req, res) => {
   };
 
 
-
+  exports.showCreateMP =async (req, res) => {
+    res.render("musicprojectView/addoredit");
+    }, 
 
   
 exports.add = async (req, res) => {

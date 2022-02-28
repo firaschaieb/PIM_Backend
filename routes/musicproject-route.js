@@ -15,6 +15,7 @@ router.route("/")
     .delete(PanierController.delete)
   
 router.delete("/all", PanierController.deleteAll)
+router.get("/add", PanierController.showCreateMP)
 //router.get("/get-my",PanierController.getMy)
 
 
