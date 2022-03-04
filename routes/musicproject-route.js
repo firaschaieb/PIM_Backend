@@ -15,8 +15,7 @@ router.route("/")
     .delete(PanierController.delete)
   
 router.delete("/all", PanierController.deleteAll)
-router.get("/add", PanierController.showCreateMP)
-//router.get("/get-my",PanierController.getMy)
+router.get("/get-my/:id",PanierController.getMy)
 
 
 
@@ -25,40 +24,6 @@ router.get("/add", PanierController.showCreateMP)
 
 
 
-
-router.get("/get-my",PanierController.getMy,async (req,res) => {
-    console.log("11")
-    res.json({prods:res.prods})
-})
-
-
-
-
-
-
-
-
-/*router.get ('/myProds:id',getProdsByUser,async (req,res) => {
-    console.log("11")
-    res.json({prods:res.prods})
-})
-
-async function getProdsByUser  (req,res,next){
-    console.log("11-----------")
-    let prods
-    try {
-        prods = await MusicProject.find({ user: req.params.id }).populate('User')
-        if (prods == null){
-            res.json({message:"sans produits"})
-        }
-    } catch (error) {
-        res.json({message:error.message})
-
-    }
-    res.prods = prods
-    next()
-}
-*/
 
 
 module.exports = router

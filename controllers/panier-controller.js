@@ -2,7 +2,6 @@ const Panier = require("../models/Panier");
 
 exports.getMy = async (req, res) => {
   res.send({ panier: await Panier.findOne({ "user": req.body.user }).populate("produits user") });
-  
 };
 
 exports.addToCart = async (req, res) => {

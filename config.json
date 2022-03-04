@@ -1,4 +1,4 @@
 {
-  "database" : "mongodb://127.0.0.1:27017/test",
+  "database" : "mongodb://127.0.0.1:27017/examen_flutter_sim_janvier_2022",
   "token_secret" : "encryption-peddler"
 }

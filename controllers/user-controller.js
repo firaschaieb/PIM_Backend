@@ -9,9 +9,7 @@ const fs = require("fs");
 
 exports.getAll = async (req, res) => {
  // console.log("1111")
-
-  const users = await User.find();
-  res.render("userView/userList", { users });
+  res.status(200).send({ users: await User.find(), message: "success" });
 };
 
 exports.getUserByToken = async (req, res) => {
@@ -26,44 +24,38 @@ exports.getUserByToken = async (req, res) => {
   res.send({ token, user: await User.findOne({ email: token.email }) });
 };
 
-exports.showCreateUser =async (req, res) => {
-  res.render("userView/addoredit");
-  }, 
-  
-exports.register = async (req, res) => {
 
+exports.register = async (req, res) => {
   console.log("1111")
   const {
-    firstName,
-    lastName,
+   username,
 
     email,
 
     password,
 
-    profilePicture,
+   // profilePicture,
 
   } = req.body;
 
   if (await User.findOne({ email })) {
     res.status(403).send({ message: "User existe deja !" });
   } else {
-  
     const nouveauUser = new User();
 
-    nouveauUser.firstName = firstName;
-    nouveauUser.lastName = lastName;
+    nouveauUser.username = username;
+  
     //nouveauUser.cin = cin;
     nouveauUser.email = email;
     //nouveauUser.address = address;
     nouveauUser.password = await bcypt.hash(password, 10);
    // nouveauUser.phoneNumber = phoneNumber;
-    nouveauUser.profilePicture = profilePicture;
+    //nouveauUser.profilePicture = profilePicture;
     nouveauUser.isVerified = true;
     //nouveauUser.role = role;
 
     nouveauUser.save();
-    
+
     const token = jwt.sign({ email: email }, config.token_secret, {
       expiresIn: "36000000",
     });
@@ -91,6 +83,7 @@ exports.login = async (req, res) => {
     if (user.isVerified) {
       console.log("1111111")
       res.status(200).send({ token, user, message: "Success" });
+      
     } else {
       res.status(200).send({ user, message: "Email not verified" });
     }
@@ -100,7 +93,7 @@ exports.login = async (req, res) => {
 };
 
 exports.loginWithSocial = async (req, res) => {
-  const { email, firstName, lastName } = req.body;
+  const { email,username } = req.body;
 
   if (email === "") {
     res.status(403).send({ message: "Error please provide an email" });
@@ -112,10 +105,10 @@ exports.loginWithSocial = async (req, res) => {
       console.log("user does not exists, creating an account");
 
       user = new User();
-
+      user.username = username;
       user.email = email;
-      user.firstName = firstName;
-      user.lastName = lastName;
+      ///user.firstName = firstName;
+      //user.lastName = lastName;
       //user.role = "Client";
       user.isVerified = true;
 
@@ -209,7 +202,7 @@ exports.forgotPassword = async (req, res) => {
 };
 
 exports.editProfile = async (req, res) => {
-  const { firstName, lastName, cin, email, address, phoneNumber } = req.body;
+  const { firstName, lastName, email } = req.body;
 
   let user = await User.findOneAndUpdate(
     { email: email },
@@ -221,9 +214,10 @@ exports.editProfile = async (req, res) => {
         email: email,
        // address: address,
        // phoneNumber: phoneNumber,
-      },
+      }, 
     }
   );
+  console.log("bien")
 
   res.send({ user });
 };

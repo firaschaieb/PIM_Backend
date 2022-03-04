@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use("/api/panier", require("./routes/panier-route"))
 app.use("/api/user", require("./routes/user-route"))
 app.use("/api/musicproject", require("./routes/musicproject-route"))
+app.use("/api/track",require("./routes/track-route"))
 // view engine setup
 app.set('views', path.join(__dirname, 'views/app'));
 app.set('view engine', 'twig');

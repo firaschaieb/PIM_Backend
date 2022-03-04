@@ -3,11 +3,11 @@ const swaggerJSDoc = require("swagger-jsdoc");
 const router = express.Router()
 const UserController = require("../controllers/user-controller")
 const upload = require('../middlewares/storage');
-router.get("/add", UserController.showCreateUser)
+
 router.get("/all", UserController.getAll)
 router.post("/get-by-token", UserController.getUserByToken)
 
-router.post("/register", UserController.register)
+router.post("/register",UserController.register)
 
 router.post("/login", UserController.login)
 router.post("/login-with-social", UserController.loginWithSocial)
