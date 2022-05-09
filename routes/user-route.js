@@ -7,7 +7,7 @@ const upload = require('../middlewares/storage');
 router.get("/all", UserController.getAll)
 router.post("/get-by-token", UserController.getUserByToken)
 
-router.post("/register", UserController.register)
+router.post("/register",UserController.register)
 
 router.post("/login", UserController.login)
 router.post("/login-with-social", UserController.loginWithSocial)

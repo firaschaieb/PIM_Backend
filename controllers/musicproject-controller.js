@@ -5,6 +5,8 @@ const MusicProject = require("../models/MusicProject");
 exports.getAll = async (req, res) => {
    
     res.send({ musicproject: await MusicProject.find() });
+    const musicProject = await MusicProject.find();
+  res.render("musicprojectView/musicprojectList", { musicProject });
   };
 
 
@@ -12,12 +14,13 @@ exports.getAll = async (req, res) => {
 
   
 exports.add = async (req, res) => {
-    const { Nom, type, user } = req.body;
+    const { Nom, type, user,style } = req.body;
   
     const newMusicProject= new MusicProject();
     
     newMusicProject.Nom = Nom
     newMusicProject.type = type 
+    newMusicProject.style = style
     newMusicProject.user = user
   
     newMusicProject.save();
@@ -26,15 +29,16 @@ exports.add = async (req, res) => {
   };
   
   exports.edit = async (req, res) => {
-    const { _id, price, marge, name, information } = req.body;
+    const { _id, price, marge, name,  } = req.body;
   
     let musicproject = await MusicProject.findOneAndUpdate(
       { _id: _id },
       {
         $set: {
           Nom:Nom,
+          style:style,
          type :type ,
-         user : user,
+       
         },
       }
     );
@@ -57,24 +61,59 @@ exports.add = async (req, res) => {
   
 
   //---------------------------------
+/*
   exports.getMy = async (req, res) => {
-      console.log("11111")
-      let musicProject
-    try { console.log(req.params.id)
-      musicProject= await MusicProject.find({   User : req.body.id }).populate("user") 
-      if ( musicProject== null){
-        res.json({message:"sans musicProject"})
-      }
-     
+    console.log("1111122222")
+    let musicProject
+  try { console.log(req.body._id)
+    musicProject= await MusicProject.find({   user : req.body._id }) 
+    if ( musicProject== null){
+      res.json({message:"sans musicProject"})
+    }
+   
 
-    } catch (error) {
-    res.json({message:error.message})
+  } catch (error) {
+  res.json({message:error.message})
 
-  }
-  res.musicProject = musicProject
+}
+res.musicProject = musicProject
+// next()
+}*/
+exports.getMy = async (req, res) => {
+  //console.log( req.params.user)
+  // get all somethings with color = something_color
+  MusicProject.find({ user: req.params.id }).exec((err,  musicProject)=>{
+    res.send(musicProject);
+  })
+};
+
+
+/*
+  exports.getMy = async (req, res) => {
+    
+    let musicProject
+  try { console.log(req.params.id)
+    musicProject= await MusicProject.findById({   User : req.params.id }) 
+    if ( musicProject== null){
+      res.json({message:"sans musicProject"})
+    }
+   
+
+  } catch (error) {
+  res.json({message:error.message})
+
+}
+//musicProject.save();
+console.log("11111")
+res.musicProject = musicProject}*/
+//musicProject.populate(function(err, result) { return res.json(result);} )
+
+// next()
+
+
+
  // next()
-  }
-
+  
 
    // res.send({
   
